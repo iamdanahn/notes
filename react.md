@@ -103,3 +103,40 @@ function MoodEmoji() {
   )
 }
 ```
+
+### useRef() 
+- creates a readable object that keeps the same reference b.w renders
+- its mutable value does not re-render UI
+
+usually used to grab native HTML elements from the DOM/JSX
+
+
+### useReducer()
+- Another way to manage state, uses the Redux pattern
+
+```js
+function reducer(state, action) {
+  switch(action.type) {
+    case 'increment': 
+      return state + 1;
+    case 'decrement':
+      return state - 1;
+    default:
+      throw new Error()
+  }
+}
+
+function App() {
+  // useReducer takes the reducer function and intial state as args
+  const [state, dispatch] = useReducer(reducer, 0);
+
+  // dispatch below has an action and payload
+  return (
+    <>
+      Count: {state}
+      <button onClick={() => dispatch({type: 'decrement'})}> - </button>
+      <button onClick={() => dispatch({type: 'increment'})}> + </button>
+    </>
+  )
+}
+```
