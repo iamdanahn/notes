@@ -140,3 +140,44 @@ function App() {
   )
 }
 ```
+
+### useMemo() - memoization of function result
+- Cache result of a function call
+- To be used only as needed for expensive calculations to optimize performance
+
+```js
+function App() {
+  const [count, setCount] = useState(60);
+
+  const expensiveCount = useMemo(() => {
+    //perform expenive computation
+    return count ** 2
+  }, [count])
+  // only runs whenever state in 2nd arg of useState occurs
+
+  return <>blank</>
+}
+```
+
+### useCallback() - memoization of function itself
+- instead of cache'ing function result, function itself will be memoized
+- when defining a fn in a component, a new fn object is created each time the 
+component is re-rendered. Could be a problem when fn is passed to multiple children
+
+```js
+function App() {
+  const [count, setCount] = useState(60);
+
+  // check docs for more info, this is confusing
+  const showCount = useCallback(() => {
+    aler(`Count ${count}`)
+  }, [count])
+
+  return <> <SomeChild handler={showCount} /> </>
+}
+```
+
+# These are less used, but read on it later
+### useImperativeHandle
+### useLayout Effect
+### useDebugValue
